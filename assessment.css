@@ -1,6 +1,7 @@
 body {
-  background: linear-gradient(to right, #f58529, #dd2a7b, #8134af, #515bd4);
-  color: #fdffff;
+  background: #FFFFFF;
+  --bg-color-overlay: transparent; 
+  color: #002600;
   font-family: Poppins, sans-serif;
     width: 500px;
   margin-right: auto;
@@ -16,4 +17,26 @@ button {
 
 input {
   height: 20px ;
+}
+
+.highlight {
+color: #999999;
+font-weight: bold;
+}
+
+h1 {
+background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+font-weight: bold;
+}
+
+h1 {
+font-size: 36px;
+font-weight: 700;
+text-align: center;
+background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+margin-bottom: 20px;
 }
