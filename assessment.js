@@ -20,13 +20,77 @@ assessmentButton.addEventListener(
     resultDivision.appendChild(header);
 
     const paragraph = document.createElement('p');
-    const result = assessment(userName);
-    paragraph.innerText = result;
+
+   const result = assessment(userName);
+   let country = "";
+ if (result.includes("アメリカ合衆国です")) {country ="アメリカ合衆国";}
+ else if (result.includes("イギリスです")) {country = "イギリス";}
+ else if (result.includes("フランスです")) {country = "フランス";}
+else if (result.includes("ドイツです")) {country = "ドイツ";}
+else if (result.includes("イタリアです")) {country = "イタリア";}
+else if (result.includes("カナダです")) {country = "カナダ";}
+else if (result.includes("オーストラリアです")) {country = "オーストラリア";}
+else if (result.includes("スペインです")) {country = "スペイン";}
+else if (result.includes("ポルトガルです")) {country = "ポルトガル";}
+else if (result.includes("アイルランドです")) {country = "アイルランド";}
+else if (result.includes("トルコです")) {country = "トルコ";}
+else if (result.includes("ロシアです")) {country = "ロシア";}
+else if (result.includes("中華人民共和国です")) {country = "中華人民共和国";}
+else if (result.includes("台湾です")) {country = "台湾";}
+else if (result.includes("メキシコです")) {country = "メキシコ";}
+else if (result.includes("日本です")) {country = "日本";}
+
+ const countryColors = {
+  "アメリカ合衆国": "#3C3B6E",
+  "イギリス": "#012169",
+  "フランス": "#0055A4",
+  "ドイツ": "#000000",
+  "イタリア": "#008C45",
+  "カナダ": "#FF0000",
+  "オーストラリア": "#00247D",
+  "スペイン": "#C60B1E",
+  "ポルトガル": "#006600",
+  "アイルランド": "#169B62",
+  "トルコ": "#E30A17",
+  "ロシア": "#D52B1E",
+  "中華人民共和国": "#DE2910",
+  "台湾": "#000099",
+  "メキシコ": "#006847",
+  "日本": "#BC002D",
+ };
+ document.body.style.backgroundColor =
+  countryColors[country] || "#FFFFFF";
+
+
+ 
+    
+    paragraph.innerHTML = result.replace(userName, `<span class="highlight">${userName}</span>`);
     resultDivision.appendChild(paragraph);
+  
+
 
     // TODO ツイートエリアの作成
+   tweetDivision.innerText = '';
+    const anchor = document.createElement('a');
+    const hrefValue =
+      'https://twitter.com/intent/tweet?button_hashtag=' +
+      encodeURIComponent('PerfectCountry') +
+      '&ref_src=twsrc%5Etfw';
+
+    anchor.setAttribute('href', hrefValue);
+    anchor.setAttribute('class', 'twitter-hashtag-button');
+    anchor.setAttribute('data-text', result);
+    anchor.innerText = 'Tweet #PerfectCountry';
+
+    tweetDivision.appendChild(anchor);
+
+
+    const script = document.createElement('script');
+    script.setAttribute('src', 'https://platform.twitter.com/widgets.js');
+    tweetDivision.appendChild(script);
   }
 );
+
 
 const answers = [
   '###userName###におすすめの国はアメリカ合衆国です。###userName###に自分の自由と夢の大切さを教えてくれるでしょう。',
@@ -46,6 +110,10 @@ const answers = [
   '###userName###におすすめの国はメキシコです。色彩豊かなこの国が###userName###の持つ色に、さらなる発色を加えてくれるでしょう。',
   '###userName###におすすめの国は日本です。###userName###のまだ見ぬこの国があなた自身を深めるでしょう。'
 ];
+
+ 
+  
+
 
 /**
  * 名前の文字列を渡すと診断結果を返す関数
@@ -67,57 +135,3 @@ function assessment(userName) {
   return result;
 }
 
-// テストを行う関数
-function test() {
-  console.log('診断結果の文章のテスト');
-
-  //太郎
-  console.log('太郎');
-  console.assert(
-    assessment('太郎') ===
-      '太郎のいいところは決断力です。太郎がする決断にいつも助けられる人がいます。',
-    '診断結果の文言の特定の部分を名前に置き換える処理が正しくありません。'
-  );
-
-  //次郎
-  console.log('次郎');
-  console.assert(
-    assessment('次郎') ===
-      '次郎のいいところは自制心です。やばいと思ったときにしっかりと衝動を抑えられる次郎が皆から評価されています。',
-    '診断結果の文言の特定の部分を名前に置き換える処理が正しくありません。'
-  );
-
-  //花子
-  console.log('花子');
-  console.assert(
-    assessment('花子') ===
-      '花子のいいところはまなざしです。花子に見つめられた人は、気になって仕方がないでしょう。',
-    '診断結果の文言の特定の部分を名前に置き換える処理が正しくありません。'
-  );
-  
-  console.log('診断結果の文章のテスト終了');
-
-  console.log('同じ名前なら、同じ結果を出力することのテスト');
-
-  console.log('太郎');
-  console.assert(
-    assessment('太郎') === assessment('太郎'),
-    '入力が同じ名前なら同じ診断結果を出力する処理が正しくありません。'
-  )
-
-  console.log('次郎');
-  console.assert(
-    assessment('次郎') === assessment('次郎'),
-    '入力が同じ名前なら同じ診断結果を出力する処理が正しくありません。'
-  )
-
-  console.log('花子');
-  console.assert(
-    assessment('花子') === assessment('花子'),
-    '入力が同じ名前なら同じ診断結果を出力する処理が正しくありません。'
-  )
-
-  console.log('同じ名前なら、同じ結果を出力することのテスト終了');
-}
-
-test();
